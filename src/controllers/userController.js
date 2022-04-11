@@ -1,4 +1,5 @@
-const bookschema = require("../models/bookschema")
+const booksmodel = require("../models/booksmodel")
+const bookschema = require("../models/booksmodel")
 const UserModel= require("../models/userModel")
 
 const createUser= async function (req, res) {
@@ -13,12 +14,12 @@ const getUsersData= async function (req, res) {
 }
 const createUser1= async function (req, res) {
     let data1 = req.body
-    let savedData1= await bookschema.create(data1)
+    let savedData1= await booksmodel.create(data1)
     res.send({msg: savedData1})
 }
 
 const getUsersData1= async function (req, res) {
-    let allUsers1= await bookschema.find()
+    let allUsers1= await booksmodel.find()
     res.send({msg: allUsers1})
 }
 
