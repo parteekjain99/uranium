@@ -1,5 +1,4 @@
 const booksmodel = require("../models/booksmodel")
-const bookschema = require("../models/booksmodel")
 const UserModel= require("../models/userModel")
 
 const createUser= async function (req, res) {

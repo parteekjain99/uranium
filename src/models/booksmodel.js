@@ -6,7 +6,7 @@ const bookSchema = new mongoose.Schema( {
     catagory: {
         type: String,
         unique: true,
-        required: true
+        // required: true
     },
     year: Number
     
