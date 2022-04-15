@@ -2,15 +2,12 @@ const mongoose = require('mongoose')
 
 
 
-const newbookschema = new mongoose.Schema({
-    author_id:{
-        type:Number,
-        required:true
-    },
-    author:String,
+const athrschema = new mongoose.Schema({
+    authorName:String,
     age:Number,
-    address:String
+    address:String,
+    rating:Number
 },{timestamps:true})
 
 
-module.exports = mongoose.model('new-author' , newbookschema)
+module.exports = mongoose.model('Newathrsme' , athrschema)

@@ -4,6 +4,7 @@ const router = express.Router();
 const UserController= require("../controllers/userController")
 const BookController= require("../controllers/bookController")
 const allcontroller= require("../controllers/allcontroller")
+const newcontroller= require("../controllers/newcontroller")
 
 router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
@@ -44,5 +45,10 @@ router.post('/y', allcontroller.y)
 router.get('/z', allcontroller.z)
 router.get('/j', allcontroller.j)
 router.get('/k', allcontroller.k)
-
+router.post('/flip', newcontroller.flip)
+router.post('/newpubr', newcontroller.newpubr)
+router.post('/newbk', newcontroller.newbk)
+router.get('/absentid', newcontroller.absentid)
+router.get('/presentid', newcontroller.presentid)
+router.get('/allbook', newcontroller.allbook)
 module.exports = router;
