@@ -51,4 +51,6 @@ router.post('/newbk', newcontroller.newbk)
 router.get('/absentid', newcontroller.absentid)
 router.get('/presentid', newcontroller.presentid)
 router.get('/allbook', newcontroller.allbook)
+
+
 module.exports = router;

@@ -1,6 +1,7 @@
 const author = require('../models/author');
 const publisher = require('../models/publisher');
 const book = require('../models/book');
+const { exists } = require('../models/book');
 
 
 
@@ -30,10 +31,17 @@ let absentid = async function(req , res) {
     let checkid = await author.findById({_id:req.body.author})
     if(checkid){
         res.send(a)
-    } else{
-        res.send({msg: "author is not valid"})
+    }if(!checkid){
+        res.send("author id is not valid")
+    }if(req.body.author !== 'undefined'){
+        res.send("error")
+    }
+     else{
+        res.send({msg: "author is not present"})
     }
 }
+
+
 
 
 let presentid = async function(req , res){
