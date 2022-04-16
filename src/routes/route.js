@@ -48,9 +48,10 @@ router.get('/k', allcontroller.k)
 router.post('/flip', newcontroller.flip)
 router.post('/newpubr', newcontroller.newpubr)
 router.post('/newbk', newcontroller.newbk)
-router.get('/absentid', newcontroller.absentid)
-router.get('/presentid', newcontroller.presentid)
 router.get('/allbook', newcontroller.allbook)
+router.put('/all', newcontroller.all)
+router.put('/penguin', newcontroller.penguin)
+router.put('/rating', newcontroller.rating)
 
 
 module.exports = router;

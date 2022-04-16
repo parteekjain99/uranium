@@ -2,6 +2,7 @@ const author = require('../models/author');
 const publisher = require('../models/publisher');
 const book = require('../models/book');
 const { exists } = require('../models/book');
+const { x } = require('./allcontroller');
 
 
 
@@ -19,40 +20,26 @@ const newpubr = async function(req, res){
 }
 
 
-const newbk = async function(req, res){
-    let data2 = req.body
-    let savedata1 = await book.create(data2)
-    res.send(savedata1)
+
+
+const newbk= async function (req, res) {
+    let data=req.body
+
+    if (data.author && data.publisher) {
+        let authIdCheck = await author.exists({ _id: data.author })
+        let publIdCheck = await publisher.exists({ _id: data.publisher })
+        if (authIdCheck && publIdCheck) {
+            if (!await book.exists(data)) {
+                let bookCreated = await book.create(data)
+                res.send({ msg: bookCreated })
+            } else res.send({ msg: "Book already exists" })
+        }
+        else res.send("AuthorId and publisherId both or any one of these are Invalid")
+    }
+    else res.send ({msg: "Author and publisher Must be present"})
 }
 
 
-let absentid = async function(req , res) {
-    let a = req.body
-    let checkid = await author.findById({_id:req.body.author})
-    if(checkid){
-        res.send(a)
-    }if(!checkid){
-        res.send("author id is not valid")
-    }if(req.body.author !== 'undefined'){
-        res.send("error")
-    }
-     else{
-        res.send({msg: "author is not present"})
-    }
-}
-
-
-
-
-let presentid = async function(req , res){
-    let b = req.body
-    let check = await publisher.findById({_id:req.body.publisher})
-    if(check){
-        res.send(b)
-    }else{
-        res.send({msg:"publisher is not present"})
-    }
-}
 
 
 let allbook = async function (req,res){
@@ -64,12 +51,36 @@ let allbook = async function (req,res){
 
 
 
+let collect = async function (req,res){
+    // let data = req.body
+    let all = await book.updateMany({publisher:"625a752d472fed9c7e2840a5"}, {$set:{isHardcover:true}},
+    {new:true , upsert:true},)
+    res.send(all)
+}
+
+let penguin = async function (req,res){
+    // let data = req.body
+    let all = await book.updateMany({publisher:"625934ca371905b59ee0260e"}, {$set:{isHardcover:true}},
+    {new:true , upsert:true},)
+    res.send(all)
+}
+
+let rating = async function(req,res){
+    
+    let oldprice = req.body.price
+    let newprice = oldprice + 10
+    let j = await book.find({rating:{$gt:3.5}}).select({rating:1, _id:0}).update({price:newprice})
+    res.send(j)
+}
+
+
 module.exports.flip = newathr
 module.exports.newpubr = newpubr
 module.exports.newbk = newbk
-module.exports.absentid = absentid
-module.exports.presentid = presentid
 module.exports.allbook = allbook
+module.exports.all = collect
+module.exports.penguin = penguin
+module.exports.rating = rating
 
 
 
