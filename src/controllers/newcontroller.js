@@ -26,17 +26,17 @@ const newbk= async function (req, res) {
     let data=req.body
 
     if (data.author && data.publisher) {
-        let authIdCheck = await author.exists({ _id: data.author })
-        let publIdCheck = await publisher.exists({ _id: data.publisher })
-        if (authIdCheck && publIdCheck) {
+        let checkid = await author.exists({ _id: data.author })
+        let check = await publisher.exists({ _id: data.publisher })
+        if (checkid && check) {
             if (!await book.exists(data)) {
                 let bookCreated = await book.create(data)
                 res.send({ msg: bookCreated })
             } else res.send({ msg: "Book already exists" })
         }
-        else res.send("AuthorId and publisherId both or any one of these are Invalid")
+        else res.send("AuthorId and publisherId  are Invalid")
     }
-    else res.send ({msg: "Author and publisher Must be present"})
+    else res.send ({msg: "Author and publisher are compulsory"})
 }
 
 
