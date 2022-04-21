@@ -14,12 +14,7 @@ mongoose.connect("mongodb+srv://FunctionUp-Uranium1:GQgLhymenkDpmdlI@cluster0.xm
 .then( () => console.log("MongoDb is connected"))
 .catch ( err => console.log(err) )
 
-app.post ("/bnj",
-    function (req, res , next) {
-        console.log(req.date);
-        next()
-  }
-  );
+
 
 app.use('/', route);
 
