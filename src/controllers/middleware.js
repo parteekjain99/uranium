@@ -12,9 +12,14 @@ const x = async function(req,res){
 
 
 const y = async function(req,res){
-    let data = req.body
-    const result = await user.create(data)
-    res.send(result)
+    let orderdtails = req.body
+    let headers = req.headers
+    let apptype = headers["isFreeAppUser"]
+    if(!apptype){
+         apptype = headers["isFreeAppUser"]
+          return res.send({status:false , msg: "missing header"})
+    };
+
 }
 
 
@@ -22,8 +27,11 @@ const y = async function(req,res){
 const z = async function(req,res){
     let data = req.body
     const result = await order.create(data)
+    let header = req.header["isfreeappuser"]
+    
     res.send(result)
 }
+
 
 
 
