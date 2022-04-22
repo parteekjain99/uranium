@@ -25,8 +25,9 @@ const loginUser = async function (req, res) {
   
     let token = jwt.sign(
       {
-        email: "xyz@gmail.com",
-        password: "password",
+        userId: user._id.toString(),
+        email:"admin@gmail.com",
+        password: "admin1234",
       },
       "xyz@gmail.com-password"
     );
@@ -38,20 +39,22 @@ const loginUser = async function (req, res) {
 
 
   const getUser = async function (req, res) {
-      let userId = req.param.userId
-       const result = await clientside.find(userId)
-       if(!result) return res.send({status:false , msg:"no such user exist"})
+      let userId = req.params.userId
+       const result = await clientside.findById(userId)
+       if(result) {res.send({status:true, data:result})}
+       
+       else{ res.send({status:false , msg:"no such user exist"})
 
-      else res.send({status:true, data:result})
+  }
   }
 
 
   const update = async function (req, res) {
-    let userId = req.param.userId
-     const result = await clientside.find(userId).updateMany({lastname:"jain"})
+    let userId = req.params.userId
+     const result = await clientside.findById(userId).updateMany({lastname:"jain"})
      if(!result) return res.send({status:false , msg:"no such user exist"})
 
-    else res.send({status:true, data:result})
+     res.send({status:true, data:result})
 
 }
 
@@ -59,8 +62,8 @@ const loginUser = async function (req, res) {
 
 
 const isdeleted = async function (req, res) {
-    let userId = req.param.userId
-     const result = await clientside.find(userId).updateMany({isdeleted:true})
+    let userId = req.params.userId
+     const result = await clientside.findById(userId).updateMany({isdeleted:true})
      if(!result) return res.send({status:false , msg:"no such user exist"})
 
     else res.send({status:true, data:result})

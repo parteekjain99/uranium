@@ -1,5 +1,5 @@
 const express = require('express');
-const app = express();;
+
 const router = express.Router();
 const programe= require("../controllers/programe")
 const assignment = require("../controllers/assignment");
@@ -38,7 +38,7 @@ router.post('/rating8' , middleware.c)
 
 router.post('/createorder1' ,   auth.login)
 router.post('/createorder2' ,   auth.user)
-router.get('/createorder3/:userId' , mid.a1 ,  auth.getUser)
+router.get('/createorder3/:userId'  ,mid.a1,  auth.getUser)
 router.put('/createorder4/:userId' , mid.a1 ,  auth.update)
 router.put('/createorder5/:userId' , mid.a1 ,  auth.delete)
 
