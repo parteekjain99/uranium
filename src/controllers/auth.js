@@ -39,25 +39,32 @@ const loginUser = async function (req, res) {
 
 
   const getUser = async function (req, res) {
-      let userId = req.params.userId
-       const result = await clientside.findById(userId)
-       if(result) {res.send({status:true, data:result})}
-       
-       else{ res.send({status:false , msg:"no such user exist"})
-
+    try{
+    let userId = req.params.userId;
+    let userDetails = await clientside.findById(userId);
+    if (!userDetails)
+      return res.status(404).send({ status: false, msg: "No such user exists" });
+  
+    res.send({ status: true, data: userDetails });
   }
+  catch(error){
+    res.status(400).send({msg: error.message});
   }
+  };
 
 
   const update = async function (req, res) {
+    try{
     let userId = req.params.userId
      const result = await clientside.findById(userId).updateMany({lastname:"jain"})
      if(!result) return res.send({status:false , msg:"no such user exist"})
 
      res.send({status:true, data:result})
 
+}catch(error){
+  res.status(400).send(error)
 }
-
+  }
  
 
 

@@ -39,8 +39,8 @@ router.post('/rating8' , middleware.c)
 router.post('/createorder1' ,   auth.login)
 router.post('/createorder2' ,   auth.user)
 router.get('/createorder3/:userId'  ,mid.a1,  auth.getUser)
-router.put('/createorder4/:userId' , mid.a1 ,  auth.update)
-router.put('/createorder5/:userId' , mid.a1 ,  auth.delete)
+router.put('/createorder4/:userId' , mid.a1 , mid.a2,  auth.update)
+router.put('/createorder5/:userId' , mid.a1 , mid.a2,  auth.delete)
 
 
 
